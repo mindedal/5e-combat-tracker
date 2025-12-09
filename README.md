@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 5e Combat Tracker
 
-## Getting Started
+A lightweight, Bun-powered Next.js app for running D&D 5e initiative with local-only storage. Add combatants, track turns and rounds, and adjust hit points quickly during play.
 
-First, run the development server:
+### Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Add combatants with initiative, max HP, and AC; sorting is automatic (initiative desc, then name).
+- Start combat to set the active combatant and round counter; advance turn cycles and increments rounds on wrap.
+- Adjust HP inline with absolute values (e.g., `12`) or deltas (`-5`, `+3`) with clamping to 0…max.
+- State persists in `localStorage`; clearing wipes the encounter.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tech stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js App Router, React 19, TypeScript
+- Tailwind CSS 4 (utility styling)
+- Bun for install, dev server, and tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Getting started
 
-## Learn More
+Prereq: [Bun](https://bun.sh/) installed.
 
-To learn more about Next.js, take a look at the following resources:
+1. Install deps: `bun install`
+2. Start dev server: `bun dev` then open http://localhost:3000
+3. Build for production: `bun run build` (served via `bun start`)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Using the tracker
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Add each combatant with name, initiative, max HP, and AC.
+2. Click **Start Combat** to lock the order and highlight the active turn.
+3. Use **Next Turn** to advance; the round counter increments on wrap.
+4. Adjust HP in the input with numbers (set) or `+/-` deltas, then **Apply** or press Enter; values clamp between 0 and max.
+5. **Clear** resets everything, including persisted state.
 
-## Deploy on Vercel
+### Testing & linting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Run tests: `bun test`
+- Lint: `bun lint`

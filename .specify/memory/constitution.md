@@ -1,50 +1,63 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# 5e Combat Tracker Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Bun-Only Runtime & Tooling
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- All install/run/test commands MUST use Bun (e.g., `bun install`, `bun run`, `bun test`).
+- npm, yarn, and pnpm are forbidden for scripts, docs, and CI. Keep Bun lockfiles authoritative.
+- Runtime assumptions, scripts, and docs MUST default to Bun; any deviation requires governance approval.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Next.js App Router with RSC-First Delivery
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+- The framework is Next.js using the App Router. React Server Components are the default.
+- Client Components (`"use client"`) are allowed only when user interactivity (hooks, event listeners) is required and MUST be justified in the plan/spec.
+- Data fetching and composition should prefer server components to minimize client JavaScript.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. TypeScript Strictness, Zero `any`
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+- The language is TypeScript with `strict` mode enabled at all times.
+- The `any` type is forbidden; use precise types, `unknown`, or generics with safe narrowing instead.
+- Code and specs MUST assume TypeScript-first patterns; JavaScript files are not allowed.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Tailwind Utility-First UI & Naming Discipline
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- Styling MUST use Tailwind CSS utility classes; CSS-in-JS libraries are forbidden.
+- Components MUST use named exports (no `default` exports) to enable safe refactors.
+- Files and folders MUST be kebab-case; React components MUST be PascalCase.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. State Discipline & Spec-Led Delivery
+
+- Use URL search params for shareable or persistent state (filters, tabs, pagination). Use `useState` only for transient UI state.
+- Avoid global state libraries (e.g., Redux) unless explicitly mandated in the spec.
+- No "vibe coding": implementation MUST follow `implementation-plan.md`; change the spec/plan first when logic needs to change.
+- Simplicity first: prefer the standard library and Bun-native APIs; avoid adding dependencies unless justified in the plan/spec.
+- Testing MUST use Bun's native test runner (`bun test`) for unit and integration coverage.
+
+## Additional Constraints
+
+- Runtime: Bun is the sole package manager and executor; CI/CD MUST mirror local Bun commands.
+- Framework: Next.js App Router only; adhere to RSC-first patterns.
+- Language & Types: TypeScript strict, zero `any`; include explicit typing and narrowing.
+- UI: Tailwind utility classes only; no CSS-in-JS; maintain kebab-case paths and PascalCase components; named exports required.
+- State: URL search params for shareable state, `useState` for transient; avoid global state libs without explicit spec approval.
+- Dependencies: Do not add packages if the same can be done with standard APIs or Bun built-ins.
+- Testing: Use `bun test`; integration and unit suites should live alongside features when possible.
+
+## Development Workflow & Quality Gates
+
+- Constitution Check is mandatory before Phase 0 research and re-checked after Phase 1 design (see plan template gates).
+- Plans/specs MUST document any Client Component justification, dependency additions, or state strategy choices.
+- Code review MUST verify: Bun-only commands, RSC-first usage, Tailwind-only styling, named exports, kebab-case paths, PascalCase components, and absence of `any`.
+- CI MUST run `bun test` and fail on constitution violations (naming, export form, prohibited tools, or styling breaches).
+- Specs and plans MUST be updated before implementing any logic changes; deviations require governance approval.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes other practices. Amendments require documented rationale, updated versioning, and migration notes in affected specs/plans.
+- Versioning follows semantic rules: MAJOR for incompatible governance/principle changes, MINOR for new principles/sections, PATCH for clarifications.
+- Ratification records the original adoption date; Last Amended is updated with every change.
+- Reviews must include a Constitution compliance check; CI/QA pipelines SHOULD enforce these gates automatically.
+- Runtime guidance (README, templates) must stay synchronized with this constitution after every amendment.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-09 | **Last Amended**: 2025-12-09
