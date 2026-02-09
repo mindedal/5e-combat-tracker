@@ -10,7 +10,8 @@
   - `name` (string, optional display name)
   - `version` (number, schema version)
   - `round` (number)
-  - `turnIndex` (number)
+  - `activeIndex` (number)
+  - `started` (boolean)
   - `participants` (Participant[])
   - `createdAt` (ISO timestamp)
   - `updatedAt` (ISO timestamp)
@@ -23,6 +24,7 @@
   - `type` ("pc" | "monster")
   - `name` (string)
   - `initiative` (number)
+  - `armorClass` (number)
   - `hp` (object)
     - `current` (number)
     - `max` (number)
@@ -65,7 +67,8 @@
 
 - `id` fields are required and stable for updates and deletions.
 - `hp.current` MUST be between 0 and `hp.max` (inclusive) when saving.
-- `round` MUST be >= 1; `turnIndex` MUST be within `participants` bounds.
+- `hp.current` MUST be between 0 and `hp.max` (inclusive) when saving.
+- `round` MUST be >= 1; `activeIndex` MUST be -1 or within `participants` bounds.
 - Conditions with no countdown use `remainingRounds = null`.
 - `version` MUST be present for all saved data and snapshots.
 

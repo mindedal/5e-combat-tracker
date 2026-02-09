@@ -91,7 +91,8 @@ components:
         - id
         - version
         - round
-        - turnIndex
+        - activeIndex
+        - started
         - participants
         - createdAt
         - updatedAt
@@ -106,9 +107,11 @@ components:
         round:
           type: integer
           minimum: 1
-        turnIndex:
+        activeIndex:
           type: integer
-          minimum: 0
+          minimum: -1
+        started:
+          type: boolean
         participants:
           type: array
           items:
@@ -126,6 +129,7 @@ components:
         - type
         - name
         - initiative
+        - armorClass
         - hp
         - conditions
       properties:
@@ -137,6 +141,8 @@ components:
         name:
           type: string
         initiative:
+          type: number
+        armorClass:
           type: number
         hp:
           type: object

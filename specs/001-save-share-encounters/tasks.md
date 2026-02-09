@@ -17,7 +17,7 @@
 
 **Purpose**: Minimal shared setup for persistence/share features
 
-- [ ] T001 Create storage/version constants in `app/lib/encounter-constants.ts`
+- [x] T001 Create storage/version constants in `app/lib/encounter-constants.ts`
 
 ---
 
@@ -25,13 +25,13 @@
 
 **Purpose**: Core helpers and schemas that must exist before user stories
 
-- [ ] T002 [P] Define encounter snapshot types and validation helpers in `app/lib/encounter-types.ts`
-- [ ] T003 [P] Implement base64url encode/decode utilities with size calculation in `app/lib/encounter-share.ts`
-- [ ] T004 [P] Implement safe localStorage read/write helpers in `app/lib/encounter-storage.ts`
-- [ ] T005 Add versioned storage migration/compatibility handling in `app/lib/encounter-storage.ts`
-- [ ] T006 Add share payload size guard and error mapping in `app/lib/encounter-share.ts`
-- [ ] T006A [P] Add unit tests for base64url encode/decode and size guards in `tests/encounter-share.test.ts`
-- [ ] T006B [P] Add unit tests for localStorage helpers (read/write/migrate/invalid data) in `tests/encounter-storage.test.ts`
+- [x] T002 [P] Define encounter snapshot types and validation helpers in `app/lib/encounter-types.ts`
+- [x] T003 [P] Implement base64url encode/decode utilities with size calculation in `app/lib/encounter-share.ts`
+- [x] T004 [P] Implement safe localStorage read/write helpers in `app/lib/encounter-storage.ts`
+- [x] T005 Add versioned storage migration/compatibility handling in `app/lib/encounter-storage.ts`
+- [x] T006 Add share payload size guard and error mapping in `app/lib/encounter-share.ts`
+- [x] T006A [P] Add unit tests for base64url encode/decode and size guards in `tests/encounter-share.test.ts`
+- [x] T006B [P] Add unit tests for localStorage helpers (read/write/migrate/invalid data) in `tests/encounter-storage.test.ts`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
 
@@ -45,15 +45,15 @@
 
 ### Implementation for User Story 1
 
-- [ ] T007 [P] [US1] Create save encounter panel (name + save action) in `app/components/save-encounter-panel.tsx`
-- [ ] T008 [P] [US1] Create saved encounters list (load/delete actions) in `app/components/saved-encounters-list.tsx`
-- [ ] T009 [US1] Wire save/load/delete actions to storage helpers in `app/page.tsx`
-- [ ] T010 [US1] Add storage-unavailable and save-error messaging in `app/components/save-encounter-panel.tsx`
-- [ ] T011 [US1] Add load/delete confirmation handling in `app/page.tsx`
+- [x] T007 [P] [US1] Create save encounter panel (name + save action) in `app/components/save-encounter-panel.tsx`
+- [x] T008 [P] [US1] Create saved encounters list (load/delete actions) in `app/components/saved-encounters-list.tsx`
+- [x] T009 [US1] Wire save/load/delete actions to storage helpers in `app/page.tsx`
+- [x] T010 [US1] Add storage-unavailable and save-error messaging in `app/components/save-encounter-panel.tsx`
+- [x] T011 [US1] Add load/delete confirmation handling in `app/page.tsx`
 
 ### Tests for User Story 1
 
-- [ ] T011A [P] [US1] Add unit tests for save/load/delete flows using storage helpers in `tests/encounter-persistence.test.ts`
+- [x] T011A [P] [US1] Add unit tests for save/load/delete flows using storage helpers in `tests/encounter-persistence.test.ts`
 
 **Checkpoint**: User Story 1 is fully functional and testable independently
 
@@ -67,14 +67,14 @@
 
 ### Implementation for User Story 2
 
-- [ ] T012 [P] [US2] Create share button with copy-to-clipboard and oversize error handling in `app/components/share-encounter-button.tsx`
-- [ ] T013 [P] [US2] Create shared snapshot preview with load action in `app/components/shared-snapshot-preview.tsx`
-- [ ] T014 [US2] Parse share payload from URL search params and validate in `app/page.tsx`
-- [ ] T015 [US2] Connect load-from-share flow to encounter state with invalid-payload safeguards in `app/page.tsx`
+- [x] T012 [P] [US2] Create share button with copy-to-clipboard and oversize error handling in `app/components/share-encounter-button.tsx`
+- [x] T013 [P] [US2] Create shared snapshot preview with load action in `app/components/shared-snapshot-preview.tsx`
+- [x] T014 [US2] Parse share payload from URL search params and validate in `app/page.tsx`
+- [x] T015 [US2] Connect load-from-share flow to encounter state with invalid-payload safeguards in `app/page.tsx`
 
 ### Tests for User Story 2
 
-- [ ] T015A [P] [US2] Add unit tests for share payload parsing and invalid-link handling in `tests/encounter-share-flow.test.ts`
+- [x] T015A [P] [US2] Add unit tests for share payload parsing and invalid-link handling in `tests/encounter-share-flow.test.ts`
 
 **Checkpoint**: User Story 2 is fully functional and testable independently
 
@@ -84,9 +84,9 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T016 [P] Update quickstart steps to match final UI labels in `specs/001-save-share-encounters/quickstart.md`
-- [ ] T017 Add user-facing version mismatch messaging in `app/page.tsx`
-- [ ] T018 Run quickstart.md validation against implemented flows in `specs/001-save-share-encounters/quickstart.md`
+- [x] T016 [P] Update quickstart steps to match final UI labels in `specs/001-save-share-encounters/quickstart.md`
+- [x] T017 Add user-facing version mismatch messaging in `app/page.tsx`
+- [x] T018 Run quickstart.md validation against implemented flows in `specs/001-save-share-encounters/quickstart.md`
 
 ---
 
