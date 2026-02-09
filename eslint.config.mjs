@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Additional ignores for this repo:
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "*.min.js",
   ]),
 ]);
 
