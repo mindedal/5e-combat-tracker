@@ -1,8 +1,8 @@
 1) Encounter Persistence + Shareable Sessions
-Let users save encounters (party + monsters + initiative + HP + conditions) to local storage or a backend, and generate a shareable link for co-DMs or players.
+Let users save encounters (party + monsters + initiative + HP + conditions) to local storage file, and generate a shareable link for co-DMs or players.
 Value: makes the app usable beyond one-off sessions.
 
-2) Conditions & Status Engine
+1) Conditions & Status Engine
 Add a system for conditions (e.g., Stunned, Poisoned, Grappled) with:
 
 automatic round countdowns,

@@ -1,0 +1,191 @@
+openapi: 3.1.0
+info:
+  title: Encounter Snapshot Contracts
+  version: 1.0.0
+  description: |
+    Client-side contracts for encounter persistence and shareable snapshots.
+    These describe payload shapes used for local storage and URL sharing.
+    No external server is required.
+servers: []
+paths:
+  /snapshot/encode:
+    post:
+      summary: Encode an encounter snapshot for sharing
+      description: Client-side operation that produces a shareable URL payload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EncounterSnapshot"
+      responses:
+        "200":
+          description: Encoded payload ready for URL usage
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - payload
+                  - size
+                properties:
+                  payload:
+                    type: string
+                    description: Base64url-encoded snapshot payload
+                  size:
+                    type: integer
+                    description: Character length of the encoded payload
+  /snapshot/decode:
+    post:
+      summary: Decode an encounter snapshot from a shareable payload
+      description: Client-side operation that validates and parses a snapshot payload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - payload
+              properties:
+                payload:
+                  type: string
+                  description: Base64url-encoded snapshot payload
+      responses:
+        "200":
+          description: Decoded snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EncounterSnapshot"
+        "400":
+          description: Invalid or incompatible payload
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    EncounterSnapshot:
+      type: object
+      required:
+        - version
+        - encodedAt
+        - encounter
+      properties:
+        version:
+          type: integer
+        encodedAt:
+          type: string
+          format: date-time
+        encounter:
+          $ref: "#/components/schemas/Encounter"
+    Encounter:
+      type: object
+      required:
+        - id
+        - version
+        - round
+        - turnIndex
+        - participants
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          nullable: true
+        version:
+          type: integer
+        round:
+          type: integer
+          minimum: 1
+        turnIndex:
+          type: integer
+          minimum: 0
+        participants:
+          type: array
+          items:
+            $ref: "#/components/schemas/Participant"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    Participant:
+      type: object
+      required:
+        - id
+        - type
+        - name
+        - initiative
+        - hp
+        - conditions
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [pc, monster]
+        name:
+          type: string
+        initiative:
+          type: number
+        hp:
+          type: object
+          required:
+            - current
+            - max
+          properties:
+            current:
+              type: number
+              minimum: 0
+            max:
+              type: number
+              minimum: 1
+            temp:
+              type: number
+              minimum: 0
+              nullable: true
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Condition"
+    Condition:
+      type: object
+      required:
+        - id
+        - name
+        - remainingRounds
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        remainingRounds:
+          type: integer
+          nullable: true
+    SavedEncounterRecord:
+      type: object
+      required:
+        - id
+        - savedAt
+        - encounter
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          nullable: true
+        savedAt:
+          type: string
+          format: date-time
+        encounter:
+          $ref: "#/components/schemas/Encounter"
